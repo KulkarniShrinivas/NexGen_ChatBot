@@ -9,4 +9,4 @@
 
 Description:
 
-OpenChatAI is a modern AI project that utilizes the OpenAI API to create a real-time chatbot similar to ChatGPT. The application not only provides dynamic conversational abilities but also incorporates a database to store user chats for conversation tracking. Users have the flexibility to delete their conversations at any time.
+AI ChatBot is a modern AI project that utilizes the OpenAI API to create a real-time chatbot similar to ChatGPT. The application not only provides dynamic conversational abilities but also incorporates a database to store user chats for conversation tracking. Users have the flexibility to delete their conversations at any time.
