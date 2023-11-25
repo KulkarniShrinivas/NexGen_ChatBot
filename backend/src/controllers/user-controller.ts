@@ -26,6 +26,7 @@ export const userSignup = async (
     res: Response,
     next: NextFunction
 ) => {
+    console.log("Request Body Before Validation:", req.body);
 
     //getting all the user from the database
     try {
@@ -36,9 +37,9 @@ export const userSignup = async (
         //     "email": "kulkarni@gmail.com",
         //     "password": "12345"
         // }
-
+ 
         //destructure above 
-        const {name, email, password} = req.body;
+        const { name, email, password } = req.body;
         //before creating new user we need to encrypt oassword using bcrypt so that we cant store password in backend
         const hashedPassword = await hash(password, 10);
         //now create brand new user
@@ -48,7 +49,8 @@ export const userSignup = async (
         await user.save();
         return res.status(200).json({ message: "OK", id:user._id.toString()});
 
-    } catch (error) {
+    } catch (error) { 
+        console.log(error);
         return res.status(400).json({message: "ERROR", cause: error.message});
         
     }
