@@ -39,9 +39,8 @@ export const validate = (validations: ValidationChain[]) => {
 //define validator for signup
 //how we can verify this below function? so I above  have created customized validator function where we can verify this details
 // Define validator for signup
-export const signupValidator = [
-    // Name is required
-    body("name").notEmpty().withMessage("Name is required"),
+
+export const loginValidator = [
 
     // Email must be a valid email address
     body("email").trim().isEmail().withMessage("Email is required"),
@@ -50,5 +49,13 @@ export const signupValidator = [
     body("password")
         .trim()
         .isLength({ min: 6 })
-        .withMessage("Password should contain 6 characters"),
+        .withMessage("Password should contain atleast  6 characters"),
+];
+
+
+
+export const signupValidator = [
+    // Name is required
+    body("name").notEmpty().withMessage("Name is required"),
+    ...loginValidator,
 ];
