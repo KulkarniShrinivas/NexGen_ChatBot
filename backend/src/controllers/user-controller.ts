@@ -16,6 +16,7 @@ export const getAllUsers = async (
         return res.status(200).json({ message: "OK", users});
 
     } catch (error) {
+        console.log(error);
         return res.status(400).json({message: "ERROR", cause: error.message});
         
     }
@@ -26,7 +27,8 @@ export const userSignup = async (
     res: Response,
     next: NextFunction
 ) => {
-    console.log("Request Body Before Validation:", req.body);
+
+    console.log("Inside userSignup controller function");
 
     //getting all the user from the database
     try {
@@ -37,7 +39,7 @@ export const userSignup = async (
         //     "email": "kulkarni@gmail.com",
         //     "password": "12345"
         // }
- 
+        console.log("Request Body Before Validation:", req.body);
         //destructure above 
         const { name, email, password } = req.body;
         //before creating new user we need to encrypt oassword using bcrypt so that we cant store password in backend
@@ -47,7 +49,7 @@ export const userSignup = async (
 
         //for saving new record in database 
         await user.save();
-        return res.status(200).json({ message: "OK", id:user._id.toString()});
+        return res.status(201).json({ message: "OK", id:user._id.toString()});
 
     } catch (error) { 
         console.log(error);

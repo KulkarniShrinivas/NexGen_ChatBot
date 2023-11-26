@@ -7,6 +7,7 @@ import { ValidationChain, validationResult } from 'express-validator';
 import { Request, Response, NextFunction } from 'express';
 import { body } from "express-validator";
 
+
 export const validate = (validations: ValidationChain[]) => {
     
     return async(req:Request, res:Response, next:NextFunction) => {
@@ -23,15 +24,17 @@ export const validate = (validations: ValidationChain[]) => {
         }
             //if there was error we dont want to move on next middlewares if not we can move
             
-            const errors = validationResult(req);
+            const errors = validationResult(req); 
             //which cann be final middleware that can store some data in database
             if(errors.isEmpty()) {
                 return next();
             }
+            console.log("Validation Errors:", errors.array());
             return res.status(422).json({ errors: errors.array() });
 
     };
 };
+
 
 //define validator for signup
 //how we can verify this below function? so I above  have created customized validator function where we can verify this details
