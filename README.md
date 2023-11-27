@@ -9,4 +9,5 @@
 
 Description:
 
-AI ChatBot is a modern AI project that utilizes the OpenAI API to create a real-time chatbot similar to ChatGPT. The application not only provides dynamic conversational abilities but also incorporates a database to store user chats for conversation tracking. Users have the flexibility to delete their conversations at any time.
+AI ChatBot is a modern AI project that utilizes the OpenAI API to create a real-time chatbot similar to ChatGPT. The application not only provides dynamic conversational abilities but also incorporates a database to store user chats for conversation tracking. Users have the flexibility to delete their conversations at any time, and 
+Developed a secure and scalable AI-ChatBot using the MERN Stack (MongoDB, Express, React, Node) with advanced authentication by implementing middlewares witg and TypeScript, delivering a production-ready SaaS application for seamless and reliable conversational experiences for users.
