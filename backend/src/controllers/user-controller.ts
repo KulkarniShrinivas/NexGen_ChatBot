@@ -4,6 +4,7 @@ import User from "../models/User.js";
 //comapre the password with actual string 
 import { hash , compare } from 'bcrypt'
 import { createToken } from "../utils/token-manager.js";
+import  { COOKIE_NAME } from "../utils/constants.js"
 
 export const getAllUsers = async (
     req: Request,
@@ -59,6 +60,40 @@ export const userSignup = async (
 
         //for saving new record in database 
         await user.save();
+
+
+        //create token and store cookie 
+
+        //user moves into the login now we want to remove the cookies of the user as well
+        // so if the user logs in again now 1st we want remove previous cookie and set current cookie
+        //after this create constants.ts in utils
+        res.clearCookie(COOKIE_NAME, {
+            httpOnly: true,
+            domain: "localhost",
+            signed: true,
+            path: "/",
+        });
+
+
+        //create new token here 
+        const token = createToken(user._id.toString(), user.email, "7d" );
+
+        //create validation for 7 days
+        const expires = new Date();
+        expires.setDate(expires.getDate() + 7 );
+        //send the token in the form of cookies we want to use cookie backend to frontend by help of packege cookie parser 
+        //this will create inside the browser
+        res.cookie(COOKIE_NAME, token, {
+            path: "/",
+            domain: "localhost",
+            expires,
+            httpOnly: true,
+            signed: true,
+        });
+
+
+
+
         return res.status(201).json({ message: "OK", id:user._id.toString()});
 
     } catch (error) { 
@@ -99,17 +134,34 @@ export const userLogin = async (
         }
 
 
+        //user moves into the login now we want to remove the cookies of the user as well
+        // so if the user logs in again now 1st we want remove previous cookie and set current cookie
+        //after this create constants.ts in utils
+        res.clearCookie(COOKIE_NAME, {
+            httpOnly: true,
+            domain: "localhost",
+            signed: true,
+            path: "/",
+        });
+
+
+
+
         //create new token here 
         const token = createToken(user._id.toString(), user.email, "7d" );
 
+        //create validation for 7 days
+        const expires = new Date();
+        expires.setDate(expires.getDate() + 7 );
         //send the token in the form of cookies we want to use cookie backend to frontend by help of packege cookie parser 
-
-
-
-
-
-        
-
+        //this will create inside the browser
+        res.cookie(COOKIE_NAME, token, {
+            path: "/",
+            domain: "localhost",
+            expires,
+            httpOnly: true,
+            signed: true,
+        });
 
 
 
