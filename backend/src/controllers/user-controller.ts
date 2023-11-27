@@ -106,3 +106,8 @@ export const userLogin = async (
         
     }
 };
+
+
+//after completing usersignup and login we need to generate token for login as authentication
+//User authentication: user needs to verify the identity  fo appplication
+//user needs to provode email password created duirng registration process and then user will be provided token after auth process
