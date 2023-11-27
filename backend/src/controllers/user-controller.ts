@@ -3,6 +3,7 @@ import User from "../models/User.js";
 //hash is used to encrypt the password
 //comapre the password with actual string 
 import { hash , compare } from 'bcrypt'
+import { createToken } from "../utils/token-manager.js";
 
 export const getAllUsers = async (
     req: Request,
@@ -98,6 +99,21 @@ export const userLogin = async (
         }
 
 
+        //create new token here 
+        const token = createToken(user._id.toString(), user.email, "7d" );
+
+        //send the token in the form of cookies we want to use cookie backend to frontend by help of packege cookie parser 
+
+
+
+
+
+        
+
+
+
+
+
         return res.status(200).json({ message: "OK", id:user._id.toString()});
 
     } catch (error) { 
@@ -111,3 +127,10 @@ export const userLogin = async (
 //after completing usersignup and login we need to generate token for login as authentication
 //User authentication: user needs to verify the identity  fo appplication
 //user needs to provode email password created duirng registration process and then user will be provided token after auth process
+//in simple when we join compny we get id card similarly after login will be getting token 
+//will be using JWT token used to encrypt payload into a signed  token that has the permission of the user
+//we need to send token to the user with help of HTTP only cookies 
+//Http cookie that comes with special security that restricts from being accessed by JS in web browser this prevents XSS attacks
+
+//User authentication -> sets  HTTP only signed cookie with JWT token -> User has Token
+//access protected resources -> User sends back the cookies -> if the cookie matches and token is valid -> process request else not abort
