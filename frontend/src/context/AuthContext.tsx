@@ -14,6 +14,61 @@
 //I will define above all this
 
 
-import { createContext } from "react";
+import { ReactNode, createContext, useContext, useEffect, useState } from "react";
 
-const AuthContext 
+//here we are using typescript so will mention type
+type User = {
+    name: string;
+    email: string;
+};
+
+type UserAuth = {
+    isLoggedIn: boolean;
+    user: User | null;
+
+    //functions for login logout and promise for void will not return anything 
+    login: (email: string, password: string) => Promise<void>;
+    signup: (name: string, email: string, password: string) => Promise<void>;
+    //logout once we move logout we need to remove cookies 
+    logout:()=>Promise<void>;
+
+};
+
+const AuthContext = createContext<UserAuth | null>(null);
+
+//authprovider it will wrap all the childerens present in that
+export const AuthProvider = ({children} : { children: ReactNode }) => {
+    //handle couple of states within the provider
+    const [user, setUser] = useState<User | null>(null);
+
+    //login
+    const [isLoggedIn, setLoggedIn] = useState(false);
+
+    //after refresh we need to run effect code we can run a function and will verify if the user cookies
+    //are still there if the cookies are valid then user doesnt need to be logged in 
+
+    useEffect(() => {
+        //fetch if the users cookies are valid then skip the login 
+    }, []);
+
+    const login = async( email: string, password: string) => {};
+    const signup = async ( name: string, email: string, password: string) => {};
+    const logout = async () => {};
+
+    
+    //define the values
+
+    const value = {
+        user,
+        isLoggedIn,
+        login,
+        logout,
+        signup,
+    };
+        return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
+
+
+};
+
+   //create context that can be used by children 
+   export const useAuth = () => useContext(AuthContext);
