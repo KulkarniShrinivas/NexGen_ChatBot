@@ -5,8 +5,9 @@ import './index.css';
 import { createTheme, ThemeProvider } from '@mui/material';
 import { BrowserRouter } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext.tsx';
-
-
+import { BASE_URL } from './utils/baseUrl.tsx';
+import axios from 'axios';
+axios.defaults.withCredentials = true;
 
 
 ///create a new theme for MUI

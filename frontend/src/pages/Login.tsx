@@ -1,10 +1,23 @@
-import { Box, Button, Typography } from '@mui/material'
+import { Box, Button, Typography } from '@mui/material';
 import React from 'react'
 import {IoIosLogIn} from "react-icons/io"
 import CustomizedInput from '../components/shared/CustomizedInput'
 
 const Login = () => {
+
+  //create function and use form data toget the values without using any state 
+  const handleSubmit = (e:React.FormEvent<HTMLFormElement>) => {
+    //browser should not be refered we use preventDefault
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const email = formData.get("email");
+    const password = formData.get("password");
+    console.log(email, password);
+  };
+
+
   return (
+    
     <Box width={"100%"} height={"100%"} display="flex" flex={1}>
       <Box 
         padding={8} 
@@ -23,6 +36,7 @@ const Login = () => {
         mt={16}
       >
           <form
+            onSubmit={handleSubmit}
             style={{
               margin: "auto",
               padding: "30px",
@@ -76,3 +90,5 @@ const Login = () => {
 }
 
 export default Login
+
+
