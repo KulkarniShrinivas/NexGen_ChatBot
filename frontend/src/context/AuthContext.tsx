@@ -15,6 +15,7 @@
 
 
 import { ReactNode, createContext, useContext, useEffect, useState } from "react";
+import { loginUser } from "../helpers/api-communicator";
 
 //here we are using typescript so will mention type
 type User = {
@@ -42,7 +43,7 @@ export const AuthProvider = ({children} : { children: ReactNode }) => {
     const [user, setUser] = useState<User | null>(null);
 
     //login
-    const [isLoggedIn, setLoggedIn] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     //after refresh we need to run effect code we can run a function and will verify if the user cookies
     //are still there if the cookies are valid then user doesnt need to be logged in 
@@ -51,7 +52,13 @@ export const AuthProvider = ({children} : { children: ReactNode }) => {
         //fetch if the users cookies are valid then skip the login 
     }, []);
 
-    const login = async( email: string, password: string) => {};
+    const login = async( email: string, password: string) => {
+        const data = await loginUser(email, password);
+        if(data) {
+            setUser({ email: data.email, name: data.name });
+            setIsLoggedIn(true);
+        }
+    };
     const signup = async ( name: string, email: string, password: string) => {};
     const logout = async () => {};
 
