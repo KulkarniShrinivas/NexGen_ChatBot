@@ -11,6 +11,9 @@
 
 
 import  jwt  from "jsonwebtoken";
+import { Request, Response, NextFunction } from 'express';
+import { promise } from "zod";
+import { rejects } from "assert";
 
 
 
@@ -24,3 +27,41 @@ export const createToken = (id:string, email:string, expiresIn: string) => {
     });
     return token;
 };
+
+
+//verify token of the user
+
+export const verifyToken = async (
+    req:Request, 
+    res:Response, 
+    next: NextFunction) => {
+        //sending cookies along with request
+
+        const token = req.signedCookies['${COOKIE_NAME}'];
+
+        if(!token || token.trim() === ""){
+            return res.status(401).json({ message: "Token Not Recevied"});
+        }
+        //now verify the token by just checking if that token has data is valid then will move on to net middleware
+        //but if the token is nogt valid and we can abort the request and send response
+
+        return new Promise<void>((resolve, reject) =>  {
+            return jwt.verify(token, process.env.JWT_SECRET,(err, success) => {
+                if(err) {
+                    reject(err.message);
+                    return res.status(401).json({ message: "Token Expired" });
+                }
+
+                //if we are successfull
+                else {
+                    console.log("Token Verification Successful");
+                    resolve(); //resolve the promise
+                    res.locals.jwtData = success; //from this middleware it can set local middleware and use that in next middleware 
+                    return next();
+
+                }
+            });
+        });
+
+};
+
