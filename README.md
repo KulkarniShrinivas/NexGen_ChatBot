@@ -19,7 +19,7 @@ Description:
 
 ## Overview
 
-The AI ChatBot is a modern AI project that leverages the OpenAI API to create a real-time chatbot with dynamic conversational abilities. This application incorporates a database for conversation tracking, allowing users to delete their conversations for enhanced privacy.
+The NexGen_ChatBot is a modern AI project that leverages the OpenAI API to create a real-time chatbot with dynamic conversational abilities. This application incorporates a database for conversation tracking, allowing users to delete their conversations for enhanced privacy.
 
 ## Features
 
