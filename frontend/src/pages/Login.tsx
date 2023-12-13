@@ -37,7 +37,7 @@ const Login = () => {
         mt={8}
         display={{ md: "flex", sm:"none", xs: "none" }}
       >
-         <img src="airobot.png" alt="Robot" style={{ width: "400px" }} />
+         <img src="homeAI.png" alt="Robot" style={{ width: "400px" }} />
       </Box>
       <Box
         display={'flex'}

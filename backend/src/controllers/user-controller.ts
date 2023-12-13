@@ -176,6 +176,82 @@ export const userLogin = async (
 };
 
 
+//Here will define another middleware where we can check authentication status 
+
+export const verifyUser = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+) => {
+
+   
+
+    //getting all the user from the database
+    try {
+       //user login
+       
+        const { email, password } = req.body;
+
+        //first we need find the user from there email
+        const user = await User.findOne({ email });
+
+        //first will verify the user if his present in database or registered 
+        if (!user) {
+            return res.status(401).send("User not registered");
+          }
+          
+        //now verify the password for authentication purpose and so this will give us boolean value and promise is resolved 
+        const isPasswordCorrect = await compare(password, user.password);
+        if (!isPasswordCorrect) {
+          return res.status(403).send("Incorrect Password");
+        }
+
+
+        //user moves into the login now we want to remove the cookies of the user as well
+        // so if the user logs in again now 1st we want remove previous cookie and set current cookie
+        //after this create constants.ts in utils
+        res.clearCookie(COOKIE_NAME, {
+            httpOnly: true,
+            domain: "localhost",
+            signed: true,
+            path: "/",
+        });
+
+
+
+
+        //create new token here 
+        const token = createToken(user._id.toString(), user.email, "7d" );
+
+        //create validation for 7 days
+        const expires = new Date();
+        expires.setDate(expires.getDate() + 7 );
+        //send the token in the form of cookies we want to use cookie backend to frontend by help of packege cookie parser 
+        //this will create inside the browser
+        res.cookie(COOKIE_NAME, token, {
+            path: "/",
+            domain: "localhost",
+            expires,
+            httpOnly: true,
+            signed: true,
+        });
+
+
+
+
+        return res.status(200).json({ message: "OK", name:user.name, email:user.email });
+
+    } catch (error) { 
+        console.log(error);
+        return res.status(403).json({message: "ERROR", cause: error.message});
+        
+    }
+};
+
+
+
+
+
 //after completing usersignup and login we need to generate token for login as authentication
 //User authentication: user needs to verify the identity  fo appplication
 //user needs to provode email password created duirng registration process and then user will be provided token after auth process
