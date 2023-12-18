@@ -10,14 +10,15 @@
 //access protected resources -> User sends back the cookies -> if the cookie matches and token is valid -> process request else not abort
 
 
-import  jwt  from "jsonwebtoken";
 import { Request, Response, NextFunction } from 'express';
+import  jwt  from "jsonwebtoken";
+import  { COOKIE_NAME } from "./constants.js";
 import { promise } from "zod";
 import { rejects } from "assert";
 
 
 
-export const createToken = (id:string, email:string, expiresIn: string) => {
+export const createToken = (id: string, email: string, expiresIn: string) => {
     const payload = { id, email };
     //secreat Key is required for hasing to  sign the token or encrypt the token
     //secreat key is private key to encrypt
@@ -37,31 +38,26 @@ export const verifyToken = async (
     next: NextFunction) => {
         //sending cookies along with request
 
-        const token = req.signedCookies['${COOKIE_NAME}'];
+        const token = req.signedCookies[`${COOKIE_NAME}`];
 
-        if(!token || token.trim() === ""){
-            return res.status(401).json({ message: "Token Not Recevied"});
-        }
+        console.log("hello");
+
+        if (!token || token.trim() === "") {
+            return res.status(401).json({ message: "Token Not Received" });
+          }
         //now verify the token by just checking if that token has data is valid then will move on to net middleware
         //but if the token is nogt valid and we can abort the request and send response
 
-        return new Promise<void>((resolve, reject) =>  {
-            return jwt.verify(token, process.env.JWT_SECRET,(err, success) => {
-                if(err) {
-                    reject(err.message);
-                    return res.status(401).json({ message: "Token Expired" });
-                }
-
-                //if we are successfull
-                else {
-                    console.log("Token Verification Successful");
-                    resolve(); //resolve the promise
-                    res.locals.jwtData = success; //from this middleware it can set local middleware and use that in next middleware 
-                    return next();
-
-                }
+        return new Promise<void>((resolve, reject) => {
+            return jwt.verify(token, process.env.JWT_SECRET, (err, success) => {
+              if (err) {
+                reject(err.message);
+                return res.status(401).json({ message: "Token Expired" });
+              } else {
+                resolve();
+                res.locals.jwtData = success;
+                return next();
+              }
             });
-        });
-
-};
-
+          });
+        };
