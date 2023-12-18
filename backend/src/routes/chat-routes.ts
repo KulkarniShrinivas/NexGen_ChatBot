@@ -1,6 +1,10 @@
 import { Router } from "express";
+import { verifyToken } from "../utils/token-manager.js";
 
-const userRoutes = Router();
 
+//Protected API
+const chatRoutes = Router();
+{/* /api/chat/new  */}
+chatRoutes.post("/new", verifyToken); 
 
-export default userRoutes;
+export default chatRoutes;
