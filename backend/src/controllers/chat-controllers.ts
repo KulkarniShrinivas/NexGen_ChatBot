@@ -20,8 +20,18 @@ export const generateChatCompletion = async (
 
 
     //grab chat of the User 
+    const chats = user.chats.map(({ role, content}) => ({ role, content })); {/**This is the static message of the chat */}
+    chats.push({content:message, role:"user" }); {/* push the chats or send the chat from the user */}
+    user.chats.push({ content: message, role: "user" }); {/**So we need to store chats in main user objects */}
+    //above all will grab the chats of the user     
+
+
+
+
     //Send all chats with new one to openAi API
-    //get latest response
+
     
+    //get latest response
+
 
   };
