@@ -4,6 +4,7 @@ import { red } from '@mui/material/colors';
 import { useAuth } from '../context/AuthContext'
 import ChatItem from '../components/chat/ChatItem';
 import { IoMdSend } from 'react-icons/io';
+import { sendChatRequest } from '../helpers/api-communicator';
 
 type Message = {
   role: "user" | "assistant";
@@ -35,6 +36,14 @@ const Chat = () => {
       //store the input in the state as well
       {/**here we are getting type error so we can declare types as well at top */}
       setChatMessages((prev) => [...prev, newMessage]) 
+
+
+      //After creating new message inside the array now we want to send API request to Backend with new message 
+      //with the help of that we will be reciving response as well and we can send new response inside the setChatMessages 
+      //I will add in api communicator
+
+      const chatData = await sendChatRequest(content);
+      setChatMessages([...chatData.chats]);
 
      };
 

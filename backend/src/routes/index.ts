@@ -11,7 +11,7 @@ const appRouter = Router();
 appRouter.use("/user", userRouter); //domain/api/v1/user
 
 //if the request is on chat then chatRoutes gona handle that 
-appRouter.use("/chats", chatRoutes); //domain/api/v1/chats
+appRouter.use("/chat", chatRoutes); //domain/api/v1/chats
 
 
 export default appRouter;
