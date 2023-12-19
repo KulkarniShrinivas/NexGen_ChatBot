@@ -1,27 +1,44 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import { Avatar, Box, Typography, Button, IconButton } from '@mui/material';
 import { red } from '@mui/material/colors';
 import { useAuth } from '../context/AuthContext'
 import ChatItem from '../components/chat/ChatItem';
 import { IoMdSend } from 'react-icons/io';
 
-const chatMessages = [
-  { role: 'user', content: "Hello, AI! What's the weather like today?" },
-  { role: 'assistant', content: 'Hello! I can help you with that. Please provide me with your location.' },
-  { role: 'user', content: 'I am in New York City.' },
-  { role: 'assistant', content: 'Great! Let me check the weather for you.' },
-  { role: 'assistant', content: 'The current temperature in New York City is 72°F with a chance of rain later today.' },
-  { role: 'user', content: 'Thanks for the update!' },
-  // Add more chats as needed
-];
+type Message = {
+  role: "user" | "assistant";
+  content: string;
+};
+
 
 const Chat = () => {
 
     //ref will allow the dta to fetch the input that hav e typed by the user from the DOM
     const inputRef = useRef<HTMLInputElement | null>(null); 
 
+    const auth = useAuth();
 
-  const auth = useAuth();
+    //Once we recive input data from the user first we want store all of the chats 
+    //first previous chats will be stored 
+    //Then we want to insert latest chats to the array 
+
+    const [ chatMessages, setChatMessages] = useState<Message[]>([])
+
+     {/**once we click on the input button we need to send the data */}
+     const handleSubmit = async () => {
+      //get the latest input messages
+      const content = inputRef.current?.value as string;
+      if(inputRef && inputRef.current) {
+        inputRef.current.value = "";
+      }
+      const newMessage: Message = { role: "user", content};
+      //store the input in the state as well
+      {/**here we are getting type error so we can declare types as well at top */}
+      setChatMessages((prev) => [...prev, newMessage]) 
+
+     };
+
+
   return (
     <Box
     sx={{
@@ -171,6 +188,7 @@ const Chat = () => {
         />
         {/**once we click on the input button we need to send the data */}
         <IconButton 
+          onClick={handleSubmit}
           sx={{
             ml:"auto",
             color: "white"
