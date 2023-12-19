@@ -23,7 +23,7 @@ const Chat = () => {
     //first previous chats will be stored 
     //Then we want to insert latest chats to the array 
 
-    const [ chatMessages, setChatMessages] = useState<Message[]>([])
+    const [ chatMessages, setChatMessages] = useState<Message[]>([]);
 
      {/**once we click on the input button we need to send the data */}
      const handleSubmit = async () => {
