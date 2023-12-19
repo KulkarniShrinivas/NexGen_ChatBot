@@ -1,7 +1,9 @@
-import React from 'react'
-import { Avatar, Box, Typography, Button } from '@mui/material';
+import React, { useRef } from 'react'
+import { Avatar, Box, Typography, Button, IconButton } from '@mui/material';
 import { red } from '@mui/material/colors';
 import { useAuth } from '../context/AuthContext'
+import ChatItem from '../components/chat/ChatItem';
+import { IoMdSend } from 'react-icons/io';
 
 const chatMessages = [
   { role: 'user', content: "Hello, AI! What's the weather like today?" },
@@ -13,7 +15,12 @@ const chatMessages = [
   // Add more chats as needed
 ];
 
-function Chat() {
+const Chat = () => {
+
+    //ref will allow the dta to fetch the input that hav e typed by the user from the DOM
+    const inputRef = useRef<HTMLInputElement | null>(null); 
+
+
   const auth = useAuth();
   return (
     <Box
@@ -52,7 +59,8 @@ function Chat() {
               color: "black",
               fontWeight: 700,
             }}
-          >{ auth?.user?.name[0] }
+          >
+          { auth?.user?.name[0] }
           {auth?.user?.name.split(" ")[0][1]}
           </Avatar>
           <Typography
@@ -134,9 +142,45 @@ function Chat() {
             scrollBehavior: "smooth",
           }}
         >
-          {chatMessages.map(( chat ) => <div>{ chat.content}</div>)}
+          {chatMessages.map((chat, index) => (
+            //@ts-ignore
+            <ChatItem content={chat.content} role={chat.role} key={index} />
+          ))}
         </Box>
+        <div style={{ 
+          width: "100%",
+         padding:"20px", 
+         borderRadius:8, 
+         backgroundColor:"rgb(17,27,39)",
+         display: "flex",
+         margin: "auto",
+         }}>
+          {/** add Input tag to type  */}
+        <input
+          ref={inputRef} 
+          type="text" 
+          style={{ 
+            width: "100%", 
+            backgroundColor: "transparent",
+            padding: "10px",
+            border: "none",
+            outline: "none",
+            color: "white",
+            fontSize: "20px",
+            }}
+        />
+        {/**once we click on the input button we need to send the data */}
+        <IconButton 
+          sx={{
+            ml:"auto",
+            color: "white"
+          }}
+        >
+          <IoMdSend />
+        </IconButton>
 
+        </div>
+        
       </Box>
     </Box>
   )
