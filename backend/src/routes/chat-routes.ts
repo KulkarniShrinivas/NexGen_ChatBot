@@ -14,4 +14,6 @@ chatRoutes.post(
     generateChatCompletion
     ); 
 
+    
+
 export default chatRoutes;

@@ -38,7 +38,7 @@ const ChatItem = ({
  ) : (
     <Box 
     sx={{
-        display: "flex",  
+        display: "flex",
         p:2,
         bgcolor: "#004d56",
         gap: 2
