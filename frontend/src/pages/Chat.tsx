@@ -23,19 +23,19 @@ const Chat = () => {
     //first previous chats will be stored 
     //Then we want to insert latest chats to the array 
 
-    const [ chatMessages, setChatMessages] = useState<Message[]>([]);
+    const [chatMessages, setChatMessages] = useState<Message[]>([]);
 
      {/**once we click on the input button we need to send the data */}
      const handleSubmit = async () => {
       //get the latest input messages
       const content = inputRef.current?.value as string;
-      if(inputRef && inputRef.current) {
-        inputRef.current.value = "";
-      }
-      const newMessage: Message = { role: "user", content};
+    if (inputRef && inputRef.current) {
+      inputRef.current.value = "";
+    }
+    const newMessage: Message = { role: "user", content };
       //store the input in the state as well
       {/**here we are getting type error so we can declare types as well at top */}
-      setChatMessages((prev) => [...prev, newMessage]) 
+      setChatMessages((prev) => [...prev, newMessage]);
 
 
       //After creating new message inside the array now we want to send API request to Backend with new message 
