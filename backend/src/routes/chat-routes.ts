@@ -12,7 +12,14 @@ chatRoutes.post(
     validate(chatCompletionValidator), 
     verifyToken,
     generateChatCompletion
-    ); 
+); 
+
+chatRoutes.get(
+    "/all-chats", 
+    verifyToken,
+    generateChatCompletion
+); 
+
 
     
 
