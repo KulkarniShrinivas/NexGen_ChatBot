@@ -48,6 +48,10 @@ const Chat = () => {
 
      };
 
+    const handleDeleteChats = async () =>{
+      
+    }
+
      useLayoutEffect(() => {
       if (auth?.isLoggedIn && auth.user) {
         toast.loading("Loading Chats", { id: "loadchats" });

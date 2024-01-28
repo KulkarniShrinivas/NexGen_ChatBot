@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { verifyToken } from "../utils/token-manager.js";
 import { validate, chatCompletionValidator } from '../utils/validators.js';
-import { generateChatCompletion, sendChatsToUser } from "../controllers/chat-controllers.js";
+import { deleteChats, generateChatCompletion, sendChatsToUser } from "../controllers/chat-controllers.js";
 
 
 //Protected API
@@ -19,6 +19,15 @@ chatRoutes.get(
     verifyToken,
     sendChatsToUser
 ); 
+
+chatRoutes.delete(
+    "/delete", 
+    verifyToken,
+    deleteChats
+); 
+
+
+
 
 
     
