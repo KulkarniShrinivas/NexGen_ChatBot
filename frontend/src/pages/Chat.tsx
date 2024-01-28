@@ -6,6 +6,7 @@ import ChatItem from '../components/chat/ChatItem';
 import { IoMdSend } from 'react-icons/io';
 import { deleteUserChats, sendChatRequest, getUserChats } from '../helpers/api-communicator';
 import toast from "react-hot-toast";
+import { useNavigate } from 'react-router-dom';
 
 type Message = {
   role: "user" | "assistant";
@@ -14,7 +15,8 @@ type Message = {
 
 
 const Chat = () => {
-
+  
+    const navigate = useNavigate();
     //ref will allow the dta to fetch the input that hav e typed by the user from the DOM
     const inputRef = useRef<HTMLInputElement | null>(null); 
 
@@ -77,6 +79,15 @@ const Chat = () => {
     }, [auth]);
     
 
+    //to check if user have logged in or not if not he will be redirected to signup page
+    //using useEffect
+
+    useEffect(() => {
+      if(!auth?.user) {
+        return navigate("/login");
+      }
+
+    }, [auth])
 
   return (
     <Box
