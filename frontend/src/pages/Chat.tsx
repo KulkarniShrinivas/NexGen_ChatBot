@@ -83,11 +83,10 @@ const Chat = () => {
     //using useEffect
 
     useEffect(() => {
-      if(!auth?.user) {
+      if (!auth?.user) {
         return navigate("/login");
       }
-
-    }, [auth])
+    }, [auth]);
 
   return (
     <Box
