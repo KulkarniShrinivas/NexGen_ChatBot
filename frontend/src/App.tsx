@@ -14,22 +14,25 @@ import { useAuth } from "./context/AuthContext";
 
 
 function App() {
+  const auth = useAuth();
 
   console.log(useAuth()?.isLoggedIn);
   
   return (
-    //register some routes of the application 
-     <main>
+    <main>
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/chat" element={<Chat />} />
-        <Route path="/*" element={<NotFound />} />
+        {auth?.isLoggedIn && auth.user && (
+          <Route path="/chat" element={<Chat />} />
+        )}
+        <Route path="*" element={<NotFound />} />
       </Routes>
-     </main>
+    </main>
   );
 }
+
 
 export default App;

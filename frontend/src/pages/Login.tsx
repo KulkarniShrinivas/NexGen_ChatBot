@@ -21,12 +21,6 @@ const Login = () => {
       toast.error("Signing In Failed", { id: "login" });
     }
   };
-  useEffect(() => {
-    if (auth?.user) {
-      return navigate("/chat");
-    }
-  }, [auth]);
-
 
   useEffect(() => {
     if(auth?.user) {
@@ -102,3 +96,5 @@ const Login = () => {
 };
 
 export default Login;
+
+
