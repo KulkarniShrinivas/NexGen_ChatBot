@@ -27,6 +27,9 @@ The NexGen_ChatBot is a modern AI project that leverages the OpenAI API to creat
 - **Conversation Tracking:** Utilizes a database to store user chats for effective tracking.
 - **User Flexibility:** Allows users to delete their conversations at any time for enhanced privacy.
 
+- ![chat2](https://github.com/KulkarniShrinivas/NexGen_ChatBot/assets/91586785/2207ea6a-263b-4dc8-9d35-1a254058fd70)
+
+
 ## Technology Stack
 
 - **MERN Stack:** MongoDB, Express, React, Node.js
