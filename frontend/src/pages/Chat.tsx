@@ -215,9 +215,10 @@ const Chat = () => {
         </Box>
         <div style={{ 
           width: "100%",
-         padding:"20px", 
-         borderRadius:8, 
+         padding:"20px",
+         borderRadius:20, 
          backgroundColor:"rgb(17,27,39)",
+         boxSizing: 'border-box',
          display: "flex",
          margin: "auto",
          }}>
