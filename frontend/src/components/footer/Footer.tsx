@@ -10,7 +10,7 @@ const Footer = () => {
           padding: 20,
           minHeight: "20vh",
           maxHeight: "30vh",
-          marginTop: 100,
+          marginTop: 60,
         }}>
           <p style={{
             fontSize: "30px", textAlign: "center" 

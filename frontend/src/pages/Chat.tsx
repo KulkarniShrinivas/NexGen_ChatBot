@@ -215,7 +215,6 @@ const Chat = () => {
         </Box>
         <div style={{ 
           width: "100%",
-         padding:"20px",
          borderRadius:20, 
          backgroundColor:"rgb(17,27,39)",
          boxSizing: 'border-box',
@@ -229,7 +228,7 @@ const Chat = () => {
           style={{ 
             width: "100%", 
             backgroundColor: "transparent",
-            padding: "10px",
+            padding: "30px",
             border: "none",
             outline: "none",
             color: "white",
@@ -241,7 +240,8 @@ const Chat = () => {
           onClick={handleSubmit}
           sx={{
             ml:"auto",
-            color: "white"
+            color: "white",
+            mx:1
           }}
         >
           <IoMdSend />
