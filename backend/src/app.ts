@@ -12,7 +12,7 @@ config();
 const app = express();
 
 //middlewares
-app.use(cors());
+app.use(cors({ origin: "https://nextgen-chatbot.netlify.app", credentials: true }));
 app.options('*', cors({ credentials: true, optionsSuccessStatus: 204 }));
 app.use(express.json());
 app.use(cookieParser(process.env.COOKIE_SECRET));
