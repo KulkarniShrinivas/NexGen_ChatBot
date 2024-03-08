@@ -8,7 +8,7 @@ import { AuthProvider } from './context/AuthContext.tsx';
 import { Toaster } from 'react-hot-toast';
 
 import axios from "axios";
-axios.defaults.baseURL = "https://nexgenchatbot.up.railway.app/api/v1";
+axios.defaults.baseURL = "https://nexgenchatbot.up.railway.app";
 // axios.defaults.baseURL = "http://localhost:5000/api/v1";
 axios.defaults.withCredentials = true;
 
