@@ -13,6 +13,7 @@ const app = express();
 
 //middlewares
 app.use(cors());
+app.options('*', cors({ credentials: true, optionsSuccessStatus: 204 }));
 app.use(express.json());
 app.use(cookieParser(process.env.COOKIE_SECRET));
 
