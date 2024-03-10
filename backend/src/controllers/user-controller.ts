@@ -37,6 +37,7 @@ export const userSignup = async (
     // create token and store cookie
     res.clearCookie(COOKIE_NAME, {
       httpOnly: true,
+      secure: true,
       domain: COOKIE_URL,
       signed: true,
       path: "/",
@@ -50,6 +51,7 @@ export const userSignup = async (
       domain: COOKIE_URL,
       expires,
       httpOnly: true,
+      secure: true,
       signed: true,
     });
 
@@ -83,6 +85,7 @@ export const userLogin = async (
 
     res.clearCookie(COOKIE_NAME, {
       httpOnly: true,
+      secure: true,
       domain: COOKIE_URL,
       signed: true,
       path: "/",
@@ -96,6 +99,7 @@ export const userLogin = async (
       domain: COOKIE_URL,
       expires,
       httpOnly: true,
+      secure: true,
       signed: true,
     });
 
@@ -148,6 +152,7 @@ export const userLogout = async (
 
     res.clearCookie(COOKIE_NAME, {
       httpOnly: true,
+      secure: true,
       domain: COOKIE_URL,
       signed: true,
       path: "/",
