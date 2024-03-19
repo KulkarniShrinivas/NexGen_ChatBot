@@ -39,6 +39,7 @@ export const userSignup = async (
       httpOnly: true,
       secure: true,
       domain: COOKIE_URL,
+      sameSite: "none",
       signed: true,
       path: "/",
     });
@@ -49,6 +50,7 @@ export const userSignup = async (
     res.cookie(COOKIE_NAME, token, {
       path: "/",
       domain: COOKIE_URL,
+      sameSite: "none",
       expires,
       httpOnly: true,
       secure: true,
@@ -97,6 +99,7 @@ export const userLogin = async (
     res.cookie(COOKIE_NAME, token, {
       path: "/",
       domain: COOKIE_URL,
+      sameSite: "none",
       expires,
       httpOnly: true,
       secure: true,
@@ -154,6 +157,7 @@ export const userLogout = async (
       httpOnly: true,
       secure: true,
       domain: COOKIE_URL,
+      sameSite: "none",
       signed: true,
       path: "/",
     });
