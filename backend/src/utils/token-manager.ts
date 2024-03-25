@@ -37,8 +37,8 @@ export const verifyToken = async (
     res:Response, 
     next: NextFunction) => {
         //sending cookies along with request
-
-        const token = req.signedCookies[`${COOKIE_NAME}`];
+         let token = req.header("Authorization");
+        // const token = req.signedCookies[`${COOKIE_NAME}`];
 
 
         if (!token || token.trim() === "") {
