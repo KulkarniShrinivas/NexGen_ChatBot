@@ -22,9 +22,20 @@ app.use(cookieParser(process.env.COOKIE_SECRET));
 
 //if we make api call to this backend then will seeing log message as well 
 //remove it in production
-app.use(morgan("dev"))
+// app.use(morgan("dev"))
 
-
+app.get("/", (req, res, next) => {
+    try {
+      res.status(200).json({
+        message: "OK",
+        description: "Server is running.",
+      });
+    } catch (err) {
+      next(err);
+    } finally {
+      console.log("Request to / endpoint");
+    }
+  });
 
 
 //when we make request on api and this will be handled by appRouter
