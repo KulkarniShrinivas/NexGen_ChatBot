@@ -52,8 +52,8 @@ The NexGen_ChatBot is a modern AI project that leverages the OpenAI API to creat
 
 ### Prerequisites
 
-- Node.js and npm installed
-- MongoDB installed locally or accessible remotely
+- Node.js and npm installed.
+- MongoDB installed locally or accessible remotely.
 
 ### Installation
 
@@ -66,18 +66,7 @@ The NexGen_ChatBot is a modern AI project that leverages the OpenAI API to creat
 
 - Follow guidelines for setting up the local development environment.
 
-## Contributing
-
-- Contributions are welcome! Read the [contribution guidelines](CONTRIBUTING.md) for details.
-
-## License
-
-This project is licensed under the [MIT License](LICENSE).
-
-
-
 ## Contact
-
 For inquiries, please contact [Contact](mailto:kulkarnishrinivas99@gmail.com).
 
 
